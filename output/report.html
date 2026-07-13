@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自动回复质量评估报告</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; padding: 20px; }
+.container { max-width: 1000px; margin: 0 auto; }
+h1 { text-align: center; color: #1a1a2e; margin-bottom: 10px; }
+h2 { color: #1a1a2e; margin: 30px 0 15px; border-bottom: 2px solid #4a90d9; padding-bottom: 8px; }
+.card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.overall { text-align: center; font-size: 48px; font-weight: bold; color: #4a90d9; }
+.overall-label { color: #888; font-size: 14px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f0f4f8; font-weight: 600; color: #555; }
+.bar { height: 20px; border-radius: 10px; background: #4a90d9; min-width: 4px; }
+.bar-bg { background: #e8ecf0; border-radius: 10px; width: 100%; }
+.score-good { color: #27ae60; font-weight: bold; }
+.score-mid { color: #f39c12; font-weight: bold; }
+.score-bad { color: #e74c3c; font-weight: bold; }
+.case { margin-bottom: 20px; }
+.case-header { font-weight: bold; margin-bottom: 6px; }
+.case-q { background: #fff3cd; padding: 8px 12px; border-radius: 4px; margin-bottom: 4px; font-size: 14px; }
+.case-a { background: #d4edda; padding: 8px 12px; border-radius: 4px; margin-bottom: 8px; font-size: 14px; }
+.case-scores { font-size: 13px; color: #666; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin: 2px; }
+.tag-neg { background: #fde8e8; color: #c0392b; }
+.tag-pos { background: #e8f8e8; color: #27ae60; }
+.tag-neu { background: #eee; color: #888; }
+.mismatch { background: #fff3cd; padding: 8px 12px; border-radius: 4px; margin-bottom: 6px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>自动回复质量评估报告</h1>
+
+<div class="card">
+<div class="overall">4.04<span class="overall-label"> / 5.00</span></div>
+<div style="text-align:center;color:#888;">整体加权均分</div>
+</div>
+
+<h2>各维度均值</h2>
+<div class="card">
+<table>
+<tr><th>维度</th><th>均分</th><th>分布</th></tr>
+
+<tr>
+<td>反幻觉</td>
+<td class="score-good">4.70</td>
+<td><div class="bar-bg"><div class="bar" style="width:94%"></div></div></td>
+</tr>
+
+<tr>
+<td>有用</td>
+<td class="score-good">3.73</td>
+<td><div class="bar-bg"><div class="bar" style="width:74.50000000000001%"></div></div></td>
+</tr>
+
+<tr>
+<td>语气</td>
+<td class="score-good">4.05</td>
+<td><div class="bar-bg"><div class="bar" style="width:81%"></div></div></td>
+</tr>
+
+<tr>
+<td>准确性</td>
+<td class="score-good">3.80</td>
+<td><div class="bar-bg"><div class="bar" style="width:76%"></div></div></td>
+</tr>
+
+</table>
+</div>
+
+<h2>各 Case 详情（按总分排序）</h2>
+
+<div class="card case">
+<div class="case-header">1. case_15 | 加权得分: <span class="score-good">5.00</span></div>
+<div class="case-q"><strong>Q:</strong> 我上次买的东西收到是坏的这次又是坏的</div>
+<div class="case-a"><strong>A:</strong> 非常抱歉连续给您带来不好的体验。我们高度重视商品质量问题。请您先申请退货退款，退货运费由我们承担。同时我们会将您的情况反馈给品控部门，加强对该类商品的质量检查。如有需要，可以申请额外的补偿优惠券。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:5.0 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:5 具体:5 负担:5 理解:5</span>
+</details>
+ | 语气:5 | 准确:5
+ | 语义相似度: 0.81 (1-5分: 4.2)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">2. case_14 | 加权得分: <span class="score-good">4.80</span></div>
+<div class="case-q"><strong>Q:</strong> 你们能不能加个功能下单前能看实物视频</div>
+<div class="case-a"><strong>A:</strong> 感谢您的宝贵建议！我们会将您的反馈转达给产品团队。目前部分商品已支持视频展示，您可以在商品详情页查看是否有视频标识。如果您有特定商品需要看实物，可以联系客服，我们会尽力协助。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.5 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:4 负担:5 理解:5</span>
+</details>
+ | 语气:5 | 准确:5
+ | 语义相似度: 0.77 (1-5分: 4.1)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">3. case_03 | 加权得分: <span class="score-good">4.70</span></div>
+<div class="case-q"><strong>Q:</strong> 退款什么时候能到账</div>
+<div class="case-a"><strong>A:</strong> 退款到账时间取决于退款方式和银行处理速度。一般情况下：原路退回（支付宝/微信）1-3个工作日，银行卡退款3-7个工作日，信用卡退款5-15个工作日。您可以在订单详情页查看退款进度。如果超时未到账，请联系客服。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.8 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:5 负担:5 理解:5</span>
+</details>
+ | 语气:4 | 准确:5
+ | 语义相似度: 0.90 (1-5分: 4.6)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">4. case_10 | 加权得分: <span class="score-good">4.60</span></div>
+<div class="case-q"><strong>Q:</strong> 刚下单还没发货能取消吗</div>
+<div class="case-a"><strong>A:</strong> 您好，订单未发货前可以申请取消。请您在订单详情页操作，或联系客服协助处理。取消后款项会在1-3个工作日退回原支付方式。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.5 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:5 负担:4 理解:5</span>
+</details>
+ | 语气:4 | 准确:5
+ | 语义相似度: 0.87 (1-5分: 4.5)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">5. case_04 | 加权得分: <span class="score-good">4.55</span></div>
+<div class="case-q"><strong>Q:</strong> 我买的蓝牙耳机左耳没声音了，才买三天</div>
+<div class="case-a"><strong>A:</strong> 抱歉给您带来不便。蓝牙耳机出现单侧无声的情况，建议您尝试以下操作：1.将耳机放回充电盒重新配对 2.检查手机蓝牙设置中是否有单声道选项 3.尝试重启耳机。如果问题仍然存在，由于在7天质保期内，您可以申请退货退款或换新。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.8 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:5 具体:5 负担:4 理解:5</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.47 (1-5分: 2.9)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">6. case_05 | 加权得分: <span class="score-good">4.55</span></div>
+<div class="case-q"><strong>Q:</strong> 你们客服态度太差了等了20分钟都没人理我</div>
+<div class="case-a"><strong>A:</strong> 非常抱歉让您久等了，给您带来了不好的体验。我们非常重视每一位客户的感受。请问您遇到了什么问题？我现在就帮您处理。同时我们会加强客服团队的培训，避免类似情况再次发生。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:4 负担:4 理解:5</span>
+</details>
+ | 语气:5 | 准确:4
+ | 语义相似度: 0.68 (1-5分: 3.7)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">7. case_07 | 加权得分: <span class="score-good">4.45</span></div>
+<div class="case-q"><strong>Q:</strong> 我收到短信说账号异地登录了是真的吗</div>
+<div class="case-a"><strong>A:</strong> 您好，异地登录提醒可能是真实的也可能是诈骗短信。请您先不要点击短信中的任何链接。建议您：1.直接登录我们的官方网站或APP查看登录记录 2.修改密码 3.开启二次验证功能。如果确认存在异常登录，请立即联系客服冻结账号。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.5 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:5 具体:4 负担:4 理解:5</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.79 (1-5分: 4.1)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">8. case_01 | 加权得分: <span class="score-good">4.35</span></div>
+<div class="case-q"><strong>Q:</strong> 我的快递到了但是放错快递柜了，取不出来</div>
+<div class="case-a"><strong>A:</strong> 您好，如果快递放错了快递柜，您可以尝试联系快递员重新派送，或者到放错的快递柜去取。建议您先查看取件码确认具体位置。如果无法解决，请联系我们的客服，我们会协助您处理。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:4 负担:4 理解:5</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.71 (1-5分: 3.8)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">9. case_20 | 加权得分: <span class="score-good">4.25</span></div>
+<div class="case-q"><strong>Q:</strong> 退货流程太复杂了搞半天都不知道怎么操作</div>
+<div class="case-a"><strong>A:</strong> 抱歉给您带来困扰。退货流程一般包括：1.在订单页面点击退货 2.选择退货原因 3.提交申请等待审核 4.按照退货地址寄回商品。如果您在某个环节遇到问题，可以截图发给客服，我们会协助您操作。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:4.0 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:4 负担:4 理解:4</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.43 (1-5分: 2.7)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">10. case_02 | 加权得分: <span class="score-good">4.05</span></div>
+<div class="case-q"><strong>Q:</strong> 这个充电宝能带上飞机吗</div>
+<div class="case-a"><strong>A:</strong> 您好，关于充电宝是否能带上飞机，根据民航局规定，额定能量不超过100Wh的充电宝可以随身携带上飞机，但不能托运。建议您查看充电宝的额定容量标识。如有疑问，请咨询具体航空公司。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:3.5 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:3 负担:3 理解:4</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.79 (1-5分: 4.1)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">11. case_17 | 加权得分: <span class="score-good">4.05</span></div>
+<div class="case-q"><strong>Q:</strong> 我那个退货的事顺便看看快递到没到</div>
+<div class="case-a"><strong>A:</strong> 您好，关于您的两个问题：1.退货进度请在订单详情页查看 2.快递进度可以在物流追踪页面查看。如果您能提供具体的订单号，我可以帮您查询更详细的信息。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:3.5 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:4 具体:3 负担:2 理解:5</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.85 (1-5分: 4.4)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">12. case_09 | 加权得分: <span class="score-good">3.95</span></div>
+<div class="case-q"><strong>Q:</strong> 退货邮费谁出</div>
+<div class="case-a"><strong>A:</strong> 退货运费承担规则如下：质量问题导致的退货，运费由商家承担；非质量问题（如不喜欢、买错了等）的退货，运费由买家承担。具体判定标准请参考我们的退换货政策。如有疑问请联系客服。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:3.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:3 具体:3 负担:3 理解:4</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.93 (1-5分: 4.7)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">13. case_12 | 加权得分: <span class="score-good">3.80</span></div>
+<div class="case-q"><strong>Q:</strong> 快递两天没更新了</div>
+<div class="case-a"><strong>A:</strong> 物流信息长时间未更新可能是以下原因：1.包裹正在中转途中 2.快递公司信息更新延迟 3.包裹可能出现问题。建议您耐心等待1-2天，如果仍未更新，请联系快递公司查询或联系我们的客服协助跟进。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:3.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:3 具体:3 负担:3 理解:4</span>
+</details>
+ | 语气:4 | 准确:3
+ | 语义相似度: 0.72 (1-5分: 3.9)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">14. case_08 | 加权得分: <span class="score-good">3.80</span></div>
+<div class="case-q"><strong>Q:</strong> 这个手机壳是硅胶的还是塑料的</div>
+<div class="case-a"><strong>A:</strong> 您好，这款手机壳采用的是TPU软胶材质，具有较好的防摔性能和手感。如果您需要更具体的材质信息，可以查看商品详情页的参数说明，或联系客服获取。</div>
+<div class="case-scores">
+反幻觉:4 | 有用:3.5 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:3 具体:4 负担:3 理解:4</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.91 (1-5分: 4.6)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">15. case_06 | 加权得分: <span class="score-good">3.75</span></div>
+<div class="case-q"><strong>Q:</strong> 优惠券怎么用不了</div>
+<div class="case-a"><strong>A:</strong> 您好，优惠券无法使用可能有以下原因：1.未达到使用门槛金额 2.商品不在优惠券适用范围内 3.优惠券已过期 4.优惠券已使用过。请您检查优惠券的使用规则。如果确认符合使用条件仍无法使用，请联系客服核实。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:2.8 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:3 具体:2 负担:2 理解:4</span>
+</details>
+ | 语气:4 | 准确:4
+ | 语义相似度: 0.82 (1-5分: 4.3)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">16. case_18 | 加权得分: <span class="score-good">3.70</span></div>
+<div class="case-q"><strong>Q:</strong> 那个扫地机器人用了两周就不工作了</div>
+<div class="case-a"><strong>A:</strong> 抱歉给您带来不便。扫地机器人使用两周就出现故障，属于质量问题。您的订单在30天质保期内，可以选择退货退款或者换新。请按照退货地址寄回商品，退货运费由我们承担。如有其他问题请联系客服。</div>
+<div class="case-scores">
+反幻觉:3 | 有用:4.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:5 具体:4 负担:3 理解:5</span>
+</details>
+ | 语气:4 | 准确:3
+ | 语义相似度: 0.76 (1-5分: 4.0)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">17. case_19 | 加权得分: <span class="score-good">3.50</span></div>
+<div class="case-q"><strong>Q:</strong> 我要买的那个包什么时候补货</div>
+<div class="case-a"><strong>A:</strong> 您好，商品补货时间不固定，建议您关注商品页面或联系客服询问预计到货时间。您也可以将商品加入购物车，补货时系统会自动提醒您。如果长时间未补货，可以考虑查看类似的替代商品。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:2.5 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:3 具体:2 负担:2 理解:3</span>
+</details>
+ | 语气:4 | 准确:3
+ | 语义相似度: 0.74 (1-5分: 4.0)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">18. case_16 | 加权得分: <span class="score-mid">3.40</span></div>
+<div class="case-q"><strong>Q:</strong> 你们首页推荐的那两款手机哪个好</div>
+<div class="case-a"><strong>A:</strong> 您好，不同手机各有优势，适合的需求也不同。如果您能告诉我具体的使用场景和预算，我可以帮您推荐更合适的选择。您也可以查看商品详情页的用户评价和参数对比来做决策。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:2.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:2 具体:2 负担:2 理解:3</span>
+</details>
+ | 语气:4 | 准确:3
+ | 语义相似度: 0.82 (1-5分: 4.3)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">19. case_11 | 加权得分: <span class="score-mid">2.95</span></div>
+<div class="case-q"><strong>Q:</strong> 买了两件衣服一件大了一件小了想换尺码</div>
+<div class="case-a"><strong>A:</strong> 您好，换货需要先退货再重新下单选择正确尺码。请分别发起两件商品的换货申请，按照退货地址寄回原商品，我们收到后会发出新尺码的商品。换货运费由买家承担。</div>
+<div class="case-scores">
+反幻觉:3 | 有用:3.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:3 具体:4 负担:2 理解:4</span>
+</details>
+ | 语气:3 | 准确:2
+ | 语义相似度: 0.83 (1-5分: 4.3)
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">20. case_13 | 加权得分: <span class="score-mid">2.70</span></div>
+<div class="case-q"><strong>Q:</strong> 我买的面膜成分表能发给我看看吗我皮肤敏感</div>
+<div class="case-a"><strong>A:</strong> 您好，面膜的成分表可以在商品详情页查看。如果您对特定成分过敏，建议您在购买前仔细核对成分表，或先购买小样进行皮肤测试。如需更详细的成分信息，可以联系品牌官方客服。</div>
+<div class="case-scores">
+反幻觉:4 | 有用:2.0 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:2 具体:2 负担:2 理解:2</span>
+</details>
+ | 语气:3 | 准确:2
+ | 语义相似度: 0.78 (1-5分: 4.1)
+</div>
+</div>
+
+
+<h2>最差 3 条 Case 分析</h2>
+
+<div class="card case">
+<div class="case-header">case_13 | 加权得分: <span class="score-bad">2.70</span></div>
+<div class="case-q"><strong>Q:</strong> 我买的面膜成分表能发给我看看吗我皮肤敏感</div>
+<div class="case-a"><strong>A:</strong> 您好，面膜的成分表可以在商品详情页查看。如果您对特定成分过敏，建议您在购买前仔细核对成分表，或先购买小样进行皮肤测试。如需更详细的成分信息，可以联系品牌官方客服。</div>
+<div class="case-scores">
+反幻觉:4 | 有用:2.0 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:2 具体:2 负担:2 理解:2</span>
+</details>
+ | 语气:3 | 准确:2
+</div>
+<div style="margin-top:8px;font-size:13px;color:#888;">
+<strong>弱点分析:</strong> 主动解决、具体针对、降低负担、理解诉求、准确性得分偏低
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">case_11 | 加权得分: <span class="score-bad">2.95</span></div>
+<div class="case-q"><strong>Q:</strong> 买了两件衣服一件大了一件小了想换尺码</div>
+<div class="case-a"><strong>A:</strong> 您好，换货需要先退货再重新下单选择正确尺码。请分别发起两件商品的换货申请，按照退货地址寄回原商品，我们收到后会发出新尺码的商品。换货运费由买家承担。</div>
+<div class="case-scores">
+反幻觉:3 | 有用:3.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:3 具体:4 负担:2 理解:4</span>
+</details>
+ | 语气:3 | 准确:2
+</div>
+<div style="margin-top:8px;font-size:13px;color:#888;">
+<strong>弱点分析:</strong> 降低负担、准确性得分偏低
+</div>
+</div>
+
+<div class="card case">
+<div class="case-header">case_16 | 加权得分: <span class="score-bad">3.40</span></div>
+<div class="case-q"><strong>Q:</strong> 你们首页推荐的那两款手机哪个好</div>
+<div class="case-a"><strong>A:</strong> 您好，不同手机各有优势，适合的需求也不同。如果您能告诉我具体的使用场景和预算，我可以帮您推荐更合适的选择。您也可以查看商品详情页的用户评价和参数对比来做决策。</div>
+<div class="case-scores">
+反幻觉:5 | 有用:2.2 |
+<details style="display:inline;margin-left:4px;">
+<summary style="cursor:pointer;color:#666;font-size:12px;">子维度明细</summary>
+<span style="font-size:12px;color:#888;">主动:2 具体:2 负担:2 理解:3</span>
+</details>
+ | 语气:4 | 准确:3
+</div>
+<div style="margin-top:8px;font-size:13px;color:#888;">
+<strong>弱点分析:</strong> 主动解决、具体针对、降低负担得分偏低
+</div>
+</div>
+
+
+
+<h2>语义相似度验证</h2>
+<div class="card">
+<p>语义相似度（自动回复 vs 人工参考回复）与 LLM 评分的相关系数: <strong>-0.153</strong></p>
+<p style="font-size:13px;color:#888;">注: 语义相似度仅作为参考指标，不参与总分计算。高相似度不等于高质量。</p>
+</div>
+
+
+
+<h2>一致性验证结果</h2>
+<div class="card">
+<p>LLM 评分与人工标注的方向一致率: <strong>61.4%</strong></p>
+<table>
+<tr><th>维度</th><th>一致率</th></tr>
+
+<tr><td>反幻觉</td><td>100.0%</td></tr>
+
+<tr><td>有用</td><td>41.0%</td></tr>
+
+<tr><td>语气</td><td>33.3%</td></tr>
+
+<tr><td>准确性</td><td>100.0%</td></tr>
+
+</table>
+
+<p style="margin-top:10px;font-weight:bold;">不一致 Case:</p>
+
+<div class="mismatch">
+case_01 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_01 | 有用-理解诉求: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_02 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_03 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_03 | 有用-具体针对: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_04 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_04 | 有用-具体针对: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_04 | 有用-降低负担: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_05 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_05 | 有用-理解诉求: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_07 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_07 | 有用-理解诉求: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_07 | 语气: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_08 | 有用-具体针对: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_08 | 有用-理解诉求: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_10 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_11 | 有用-具体针对: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_14 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_14 | 有用-具体针对: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_15 | 有用-具体针对: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_15 | 语气: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_17 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_18 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_18 | 有用-理解诉求: LLM=positive 人工=negative (LLM评分:5)
+</div>
+
+<div class="mismatch">
+case_20 | 有用-主动解决: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_20 | 有用-具体针对: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+<div class="mismatch">
+case_20 | 有用-理解诉求: LLM=positive 人工=negative (LLM评分:4)
+</div>
+
+
+</div>
+
+
+<h2>局限性分析</h2>
+<div class="card">
+<ul style="padding-left:20px;">
+<li><strong>LLM-as-Judge 的主观性:</strong> 评分结果受 LLM 自身偏差影响，不同模型可能给出不同分数。</li>
+<li><strong>Mock 模式的粗糙性:</strong> 基于关键词匹配的 Mock 评分无法捕捉语义细节，仅适合验证流水线。</li>
+<li><strong>语义相似度的局限:</strong> 高相似度不等于高质量（如 case_20 自动回复和人工回复都提及"退货流程"，但自动回复是答非所问）。</li>
+<li><strong>人工标注的覆盖度:</strong> annotator_notes 并非对所有维度都有判断，一致性验证只能覆盖部分维度。</li>
+<li><strong>权重设定的主观性:</strong> 当前权重基于讨论共识，但不同场景可能需要调整。</li>
+<li><strong>改进方向:</strong> 可使用多模型 ensemble 评分、引入更多人工标注作为 ground truth 校准、支持自定义权重配置。</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>
